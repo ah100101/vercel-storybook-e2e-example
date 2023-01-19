@@ -36,3 +36,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Deploying Storybook to Vercel
+
+1. Create a new project pointing to this repo.
+2. Instead of the default build settings, configure settings to match following `vercel.json`
+
+```
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build-storybook",
+  "devCommand": "npm run storybook",
+  "installCommand": "npm install",
+  "framework": null,
+  "outputDirectory": "./storybook-static"
+}
+```
