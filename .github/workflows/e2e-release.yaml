@@ -1,0 +1,32 @@
+name: E2E-Release
+on: [deployment_status]
+jobs:
+  e2e:
+    name: e2e
+    if: github.event.deployment_status.environment == production && == 'deployment_status' && github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: End-to-End tests (Cypress)
+        uses: cypress-io/github-action@v5
+        with:
+          record: true
+          parallel: true
+          command: npm run e2e:ci baseUrl=${{ github.event.deployment_status.deployment_url }}
+  release:
+    needs: e2e
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Alias Production URL
+        run: vercel alias --token=${{ secrets.VERCEL_TOKEN }} set $VERCEL_URL vercel-storybook-e2e-example-storybook-production.vercel.app
