@@ -16,4 +16,4 @@ jobs:
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Alias Production URL
-        run: vercel alias --token=${{ secrets.VERCEL_TOKEN }} set VERCEL_URL vercel-storybook-e2e-example-storybook-production.vercel.app
+        run: vercel alias --token=${{ secrets.VERCEL_TOKEN }} set $VERCEL_URL vercel-storybook-e2e-example-storybook-production.vercel.app
