@@ -3,7 +3,7 @@ on: [deployment_status]
 jobs:
   e2e:
     name: e2e
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.environment == 'production' && github.event.deployment_status.state == 'success'
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
