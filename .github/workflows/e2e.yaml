@@ -19,8 +19,4 @@ jobs:
           record: true
           parallel: true
           command: npm run e2e:ci baseUrl=${{ github.event.deployment_status.target_url }}
-        if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
-        # env:
-        #   CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
-        #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event.deployment.environment == 'production' && github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
