@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      # - name: Pull Vercel Environment Information
+      #   run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Alias Production URL
         run: vercel alias --token=${{ secrets.VERCEL_TOKEN }} set $VERCEL_URL vercel-storybook-e2e-example-storybook-production.vercel.app
