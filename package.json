@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "e2e:local": "cypress run --config baseUrl=http://localhost:3000",
+    "e2e:ci": "cypress run --config"
   },
   "dependencies": {
     "@next/font": "13.1.2",
