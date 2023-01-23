@@ -1,0 +1,17 @@
+name: Release
+on:
+  workflow_run:
+    workflows: ["E2E"]
+    branches: [main]
+    types:
+      - completed
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel alias --token=${{ secrets.VERCEL_TOKEN }} set `cat domain.txt` your-alias.app

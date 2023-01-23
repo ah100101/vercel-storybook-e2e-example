@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3]
+        containers: [1]
 
     steps:
       - name: Checkout
@@ -19,4 +19,4 @@ jobs:
           record: true
           parallel: true
           command: npm run e2e:ci baseUrl=${{ github.event.deployment_status.target_url }}
-        if: github.event.deployment.environment == 'production' && github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+        if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
