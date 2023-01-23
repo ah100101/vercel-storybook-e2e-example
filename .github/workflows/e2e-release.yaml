@@ -3,7 +3,7 @@ on: [deployment_status]
 jobs:
   e2e:
     name: e2e
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    if: github.event.deployment.environment == 'production' && github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -17,7 +17,7 @@ jobs:
         with:
           record: true
           parallel: true
-          command: npm run e2e:ci baseUrl=${{ github.event.deployment_status.deployment_url }}
+          command: npm run e2e:ci baseUrl=${{ github.event.deployment_status.target_url }}
   release:
     needs: e2e
     name: release
