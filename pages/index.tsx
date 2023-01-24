@@ -17,7 +17,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            V8 - Get started by editing&nbsp;
+            V-8 - Get started by editing&nbsp;
             <code className={styles.code}>pages/index.tsx</code>
           </p>
           <div>
